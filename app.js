@@ -63,12 +63,13 @@ app.get('/gallery/product/download', function(req, res){
 
 app.get('/gallery/product/install', function(req, res){
     var item = url.parse(req.url).query;
-	var filePath = packages_folder + item + '.zip';
+	var filePath = 'c:\\' + item + '.zip';
 	
 	blobService.getBlobToFile(package_container, item + '.mob', filePath, function(error, result, response){
 		if(!error){
+		    console.log(filePath);
 			var zip = new admzip(filePath);
-			zip.extractAllTo('\Extracted\\' + item, true);
+			zip.extractAllTo('c:\\Extracted\\' + item, true);
 			res.redirect(req.get('referer'));
 		}
 	});	
